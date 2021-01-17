@@ -8,10 +8,10 @@ using Discord.Commands;
 namespace Akulakhan.Modules
 {
     [Group("raid")]
-    public class Raid : ModuleBase<SocketCommandContext>
+    public class RaidModule : ModuleBase<SocketCommandContext>
     {
         [Command]
-        public async Task DefaultRaidAsync()
+        public async Task Raid()
         {
             //
         }

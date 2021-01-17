@@ -14,9 +14,9 @@ namespace Akulakhan
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private DiscordSocketClient _client;
-        private CommandService _commands;
-        private IServiceProvider _services;
+        private static DiscordSocketClient _client;
+        public static CommandService _commands;
+        private static IServiceProvider _services;
 
         public Worker(ILogger<Worker> logger)
         {
@@ -32,6 +32,7 @@ namespace Akulakhan
             }
         }
 
+        // setup and start the bot
         public async Task MainAsync()
         {
             _client = new DiscordSocketClient();
@@ -41,8 +42,8 @@ namespace Akulakhan
                 .AddSingleton(_commands)
                 .BuildServiceProvider();
 
-            _client.MessageReceived += OnMessage;
-            _client.Ready += OnReady;
+            _client.MessageReceived += OnMessageAsync;
+            _client.Ready += OnReadyAsync;
             _client.Log += Log;
 
             await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services);
@@ -51,21 +52,28 @@ namespace Akulakhan
             await Task.Delay(-1);
         }
 
-        private async Task OnReady()
+        private async Task OnReadyAsync()
         {
             await _client.SetActivityAsync(new Game("dotNet", ActivityType.Playing));
         }
 
-        private async Task OnMessage(SocketMessage arg)
+        // handling for incoming messages
+        private async Task OnMessageAsync(SocketMessage arg)
         {
             var message = arg as SocketUserMessage;
             var context = new SocketCommandContext(_client, message);
             int pos = 0;
 
+            // ignores messages that don't start with the command prefix or were sent by a bot
             if (!message.HasCharPrefix(config.prefix, ref pos) || message.Author.IsBot) return;
 
             var result = await _commands.ExecuteAsync(context, pos, _services);
-            if (!result.IsSuccess) Console.WriteLine(result.Error + "|" + result.ErrorReason);
+            // handling the error if command execution fails
+            if (!result.IsSuccess)
+            {
+                Console.WriteLine(result.Error + "|" + result.ErrorReason);
+                await message.Channel.SendMessageAsync($"Ups, something went wrong. Use `{config.prefix}help` for a list of commands");
+            }
         }
 
         public Task Log(LogMessage msg)
