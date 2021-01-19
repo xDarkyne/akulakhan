@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "z7l2Aq6qgzPdw6yuySkGoY1yEOq05aMzHVO+/ZsC7Befnvw0m+t9nC6KTLRrQXXPGsy2hQkmQ6vY54RxwfygOg==",
+  "dgSpecHash": "tI7+153tXTJ80BEzxx4va3fk+cSuK4xrku8OjYE0MQANGL2hCiKz8D7y2QX2yF3NDsiy4nCf9XXP3uPQ5mpN+A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dimit\\source\\repos\\Akulakhan\\Akulakhan\\Akulakhan.csproj",
+  "projectFilePath": "F:\\Akulakhan\\Akulakhan\\Akulakhan.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dimit\\.nuget\\packages\\discord.net\\2.2.0\\discord.net.2.2.0.nupkg.sha512",
     "C:\\Users\\dimit\\.nuget\\packages\\discord.net.commands\\2.2.0\\discord.net.commands.2.2.0.nupkg.sha512",

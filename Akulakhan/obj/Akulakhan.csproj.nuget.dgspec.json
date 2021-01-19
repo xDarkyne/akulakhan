@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dimit\\source\\repos\\Akulakhan\\Akulakhan\\Akulakhan.csproj": {}
+    "F:\\Akulakhan\\Akulakhan\\Akulakhan.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dimit\\source\\repos\\Akulakhan\\Akulakhan\\Akulakhan.csproj": {
+    "F:\\Akulakhan\\Akulakhan\\Akulakhan.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dimit\\source\\repos\\Akulakhan\\Akulakhan\\Akulakhan.csproj",
+        "projectUniqueName": "F:\\Akulakhan\\Akulakhan\\Akulakhan.csproj",
         "projectName": "Akulakhan",
-        "projectPath": "C:\\Users\\dimit\\source\\repos\\Akulakhan\\Akulakhan\\Akulakhan.csproj",
+        "projectPath": "F:\\Akulakhan\\Akulakhan\\Akulakhan.csproj",
         "packagesPath": "C:\\Users\\dimit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dimit\\source\\repos\\Akulakhan\\Akulakhan\\obj\\",
+        "outputPath": "F:\\Akulakhan\\Akulakhan\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dimit\\AppData\\Roaming\\NuGet\\NuGet.Config",

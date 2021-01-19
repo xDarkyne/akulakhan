@@ -14,9 +14,9 @@ namespace Akulakhan
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private static DiscordSocketClient _client;
-        public static CommandService _commands;
-        private static IServiceProvider _services;
+        private DiscordSocketClient _client;
+        public CommandService _commands;
+        private IServiceProvider _services;
 
         public Worker(ILogger<Worker> logger)
         {
@@ -44,6 +44,7 @@ namespace Akulakhan
 
             _client.MessageReceived += OnMessageAsync;
             _client.Ready += OnReadyAsync;
+            _client.UserJoined += OnUserJoinAsync;
             _client.Log += Log;
 
             await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _services);
@@ -52,6 +53,7 @@ namespace Akulakhan
             await Task.Delay(-1);
         }
 
+        // handling what happens when the bot gets ready
         private async Task OnReadyAsync()
         {
             await _client.SetActivityAsync(new Game("dotNet", ActivityType.Playing));
@@ -76,6 +78,20 @@ namespace Akulakhan
             }
         }
 
+        // handling what happens when a new user joins
+        private async Task OnUserJoinAsync(SocketGuildUser user)
+        {
+            var guild = user.Guild;
+            var role = guild.GetRole(config.defaultRoleID);
+
+            // check if the bot user has sufficient permission and if the role was found
+            if (!guild.CurrentUser.GuildPermissions.Has(GuildPermission.ManageRoles) || role == null) return;
+
+            // add the role to the user
+            await user.AddRoleAsync(role);
+        }
+
+        // handling logs
         public Task Log(LogMessage msg)
         {
             try
