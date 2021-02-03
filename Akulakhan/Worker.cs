@@ -57,13 +57,14 @@ namespace Akulakhan
             await Task.Delay(-1);
         }
 
-        // handling what happens when the bot gets ready
+        #region Event: OnReadyAsync | Triggered: When the bot gets ready
         private async Task OnReadyAsync()
         {
             await _client.SetActivityAsync(new Game("dotNet", ActivityType.Playing));
         }
+        #endregion
 
-        // handling for incoming messages
+        #region Event: OnMessageAsync | Triggered: When a user or a bot sent a message
         private async Task OnMessageAsync(SocketMessage arg)
         {
             var message = arg as SocketUserMessage;
@@ -81,8 +82,9 @@ namespace Akulakhan
                 await message.Channel.SendMessageAsync($"Ups, something went wrong. Use `{config.prefix}help` for a list of commands");
             }
         }
+        #endregion
 
-        // handling updates of a user's voice state (e.g. when someone joins or leaves a voice channel)
+        #region Event: OnUserVoiceStateUpdatedAsync | Triggered: When a user joins or leaves a voice channel
         private async Task OnUserVoiceStateUpdatedAsync(SocketUser user, SocketVoiceState oldState, SocketVoiceState newState)
         {
             // check if the user joined a channel
@@ -120,8 +122,9 @@ namespace Akulakhan
                 }
             }
         }
+        #endregion
 
-        // handling what happens when a new user joins
+        #region Event: OnUserJoinAsync | Triggered: When a user joins the server
         private async Task OnUserJoinAsync(SocketGuildUser user)
         {
             var guild = user.Guild;
@@ -133,8 +136,9 @@ namespace Akulakhan
             // add the role to the user
             await user.AddRoleAsync(role);
         }
+        #endregion
 
-        // handling logs
+        #region Log Function
         public Task Log(LogMessage msg)
         {
             try
@@ -146,8 +150,12 @@ namespace Akulakhan
             catch { return null; }
         }
     }
+    #endregion
 
-    // struct for custom channels
+    #region custom structs
+    /// <summary>
+    /// Wrapper for custom channels. Holds an Owner (SocketGuildUser) and a Channel (IVoiceChannel)
+    /// </summary>
     public struct CustomChannel
     {
         public SocketGuildUser Owner;
@@ -159,4 +167,5 @@ namespace Akulakhan
             Channel = channel;
         }
     }
+    #endregion
 }
