@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Discord;
+﻿using System.Threading.Tasks;
 using Discord.Commands;
 
 namespace Akulakhan.Modules
@@ -9,7 +7,7 @@ namespace Akulakhan.Modules
     public class CustomChannelModule : ModuleBase<SocketCommandContext>
     {
         [Command("name"), Ratelimit(2, 10, Measure.Minutes)]
-        public async Task SetNameAsync(string name)
+        public async Task SetNameAsync([Remainder]string name)
         {
             var user = Context.User;
 

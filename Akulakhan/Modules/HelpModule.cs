@@ -15,7 +15,7 @@ namespace Akulakhan.Modules
         }
 
         [Command("help")]
-        public async Task Help()
+        public async Task HelpAsync()
         {
             var embedBuilder = new EmbedBuilder()
             {
@@ -51,7 +51,7 @@ namespace Akulakhan.Modules
         }
 
         [Command("help")]
-        public async Task Help(string command)
+        public async Task HelpAsync(string command)
         {
             var result = _service.Search(Context, command);
 
